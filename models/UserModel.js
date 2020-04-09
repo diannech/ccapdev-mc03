@@ -8,6 +8,8 @@ var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
     // your code here
+    name: { type: String, required: [true, "No name provided"] },
+    number: { type: Number, required: [true, "No number provided"] }
 });
 
 module.exports = mongoose.model('User', UserSchema);

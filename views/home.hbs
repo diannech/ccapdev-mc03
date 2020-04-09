@@ -26,6 +26,13 @@
             -->
             <div id="contacts">
             <!-- your code here -->
+                {{#if contact}}
+                {{#each contact}}
+                    {{> card}}
+                {{/each}}
+                {{else}}
+                <p>No conatacts yet</p>
+                {{/if}}
             </div>
         </div>
     </div>

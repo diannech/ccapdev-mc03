@@ -17,6 +17,13 @@ $(document).ready(function () {
     */
     $('#number').keyup(function () {
         // your code here
+        db.exists({ number: '#number' }, function(err, result) {
+            if (err) {
+                result.send(err);
+            } else {
+                result.send(result);
+            }
+        });
     });
 
     /*
@@ -32,6 +39,30 @@ $(document).ready(function () {
     */
     $('#submit').click(function () {
         // your code here
+        var name = $('#name').val();
+        var name = $('#idnum').val();
+
+        var newContact = {
+            name: name,
+            number: number
+        };
+        
+        $.post('addContact', newContact, function(data, status) {
+            console.log(data);
+
+            if (data.success) {
+                $('#msg').text(data.message);
+                $('#msg').removeClass('fail');
+                $('#msg').addClass('success');
+
+                $('#name').val('');
+                $('#number').val('');
+            } else {
+                $('#msg').text(data.message);
+                $('#msg').removeClass('success');
+                $('#msg').addClass('fail');
+            }
+        })
     });
 
     /*
@@ -43,6 +74,7 @@ $(document).ready(function () {
     */
     $('#contacts').on('click', '.remove', function () {
         // your code here
+		$(this).remove();
     });
 
 })
